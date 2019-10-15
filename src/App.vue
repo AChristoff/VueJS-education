@@ -1,44 +1,40 @@
 <template>
     <div class="container">
-        <button>Add</button>
-        <button>ToDo</button>
-        <button>Complete</button>
         
-        <p>
-            <label for="new-task">Add Item</label>
-            <input id="new-task" type="text"/>
-            <button>Add</button>
-        </p>
+        <button @click="changeTab('TodoList')">Todo List</button>
+        <button @click="changeTab('CompletedTodos')">Completed</button>
+        <button @click="changeTab('AddTodo')">Add</button>
         
-        <h3>Completed</h3>
-        <ul id="completed-tasks">
-            <li>
-                <label>Go to Gym</label>
-                <button class="restore">Restore</button>
-                <button class="delete">Delete</button>
-            </li>
-            <li>
-                <label>Go to Store</label>
-                <button class="restore">Restore</button>
-                <button class="delete">Delete</button>
-            </li>
-        </ul>
+        <keep-alive>
+            <component :is="activeTab"></component>
+        </keep-alive>
         
-        <h3>Todo</h3>
-        <ul id="incomplete-tasks">
-            <li>
-                <label>Feed the Cat</label>
-                <button class="complete">Complete</button>
-                <button class="delete">Delete</button>
-            </li>
-        </ul>
     </div>
 </template>
 
 <script>
 
+    import TodoList from './components/TodoList';
+    import CompletedTodos from './components/CompletedTodos';
+    import AddTodo from './components/AddTodo';
+
     export default {
         name: 'app',
+        data() {
+            return {
+                activeTab: 'TodoList',
+            }
+        },
+        components: {
+            TodoList,
+            CompletedTodos,
+            AddTodo,
+        },
+        methods: {
+            changeTab(tabName) {
+                this.activeTab = tabName;
+            }
+        }
     }
 </script>
 
@@ -80,8 +76,7 @@
         border: 0px;
         color: #888;
         font-size: 15px;
-        width: 60px;
-        margin: 10px 0 0;
+        width: 90px;
         font-family: Lato, sans-serif;
         cursor: pointer;
     }
@@ -148,7 +143,7 @@
         padding: 0 0 0 11px;
     }
     
-    button {
+    button:not(:first-child) {
         margin: 0 0 0 10px;
     }
     
