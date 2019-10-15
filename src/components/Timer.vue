@@ -1,49 +1,44 @@
 <template>
-    <div>
-    
-        <!-- Proprs (from App) -->
-        <h2>{{message}}</h2>
-        <p v-for="(number, index) in numbers" :key="index">{{index + " - " + number}}</p>
-        
-        <!-- Anonymous slots (from App) -->
-        <slot>Default content is there is no incoming data</slot>
-        <!-- Named slots (from App) -->
-        <hr>
-        <slot name="personSlotName" :person="person" >Default name - Pesho</slot>
-        <hr>
-        <slot name="message">Default message - Hi</slot>
-       
-        
+    <div class="timer-component">
+        <p>{{name}}</p>
+        <p>{{time}}</p>
+        <button @click="onStartClick">{{buttonText}}</button>
     </div>
 </template>
 
 <script>
+import eventBus from "../tools/eventBus";
+    
     export default {
         name: "Timer",
         props: {
-            message: {
-                type: String,
-                default: 'default value',
-                validator(value) {
-                    return value.length < 20;
-                }
-            },
-            numbers: {
-                type: Array,
-                validator(arr) {
-                    return arr.every(el => typeof el === 'string')
-                },
-                required: true,
-            },
+            name: String,
         },
         data() {
             return {
-                person: {
-                    name: 'Pesho from Timer component',
-                    age: 18,
-                    email: 'pesho@mail.com'
-                }
+                time: 0,
+                isStarted: false,
+                timerID: -1,
             }
+        },
+        computed: {
+            buttonText() {
+                return this.isStarted ? 'Stop' : 'Start';
+            }
+        },
+        methods: {
+            onStartClick() {
+                if (this.isStarted) {
+                    clearInterval(this.timerID);
+                    this.isStarted = false;
+                    // eventBus.$emit('timer-stopped', {name: this.name, time: this.time});
+                    this.$root.$emit('timer-stopped', {name: this.name, time: this.time});
+                    this.time = 0;
+                } else {
+                    this.timerID = setInterval(() => this.time++, 1000);
+                    this.isStarted = true;
+                }
+            },
         }
     }
 </script>
