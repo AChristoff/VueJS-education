@@ -2,13 +2,8 @@
     <div>
         <h3>Completed</h3>
         <ul id="completed-tasks">
-            <li>
-                <label>Go to Gym</label>
-                <button class="restore">Restore</button>
-                <button class="delete">Delete</button>
-            </li>
-            <li>
-                <label>Go to Store</label>
+            <li v-for="todo in completedTodos" :key="todo.id">
+                <label>{{todo.name}}</label>
                 <button class="restore">Restore</button>
                 <button class="delete">Delete</button>
             </li>
@@ -18,7 +13,13 @@
 
 <script>
     export default {
-        name: "CompletedTodos"
+        name: "CompletedTodos",
+        props: {
+            completedTodos: {
+                type: Array,
+                required: true,
+            }
+        }
     }
 </script>
 

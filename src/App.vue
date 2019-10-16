@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         
-        <button @click="changeTab('TodoList')">Todo List</button>
+        <button @click="changeTab('IncompletedTodos')">Todo List</button>
         <button @click="changeTab('CompletedTodos')">Completed</button>
         <button @click="changeTab('AddTodo')">Add</button>
         
@@ -9,6 +9,7 @@
             <component
                 :is="activeTab"
                 :incompletedTodos="incompletedTodos"
+                :completedTodos="completedTodos"
                 @AddTodo="onAddTodo"
                 @complete-todo="onCompleteTodo">
                 
@@ -42,7 +43,11 @@
         computed: {
             incompletedTodos(){
                 return this.todos.filter((x) => !x.completed);
+            },
+            completedTodos() {
+                return this.todos.filter((x) => x.completed);
             }
+            
         },
         methods: {
             changeTab(tabName) {
