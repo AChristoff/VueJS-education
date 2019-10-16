@@ -9,7 +9,10 @@
             <component
                 :is="activeTab"
                 :todos="todos"
-                @AddTodo="onAddTodo">
+                @AddTodo="onAddTodo"
+                @completeTodo="onCompleteTodo"
+                @deleteTodo="onDeleteTodo">
+                
             </component>
         </keep-alive>
     
@@ -47,6 +50,14 @@
                     name: todoName,
                     completed: false,
                 })
+            },
+            onCompleteTodo(todoId) {
+                let currentTodo = this.todos.find((x) => x.id === todoId);
+                currentTodo.completed = true;
+            },
+            onDeleteTodo(todoId) {
+                let currentTodo = this.todos.find((x) => x.id === todoId);
+                currentTodo.completed = true;
             }
         }
     }
