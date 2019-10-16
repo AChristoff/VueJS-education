@@ -8,10 +8,9 @@
         <keep-alive>
             <component
                 :is="activeTab"
-                :todos="todos"
+                :incompletedTodos="incompletedTodos"
                 @AddTodo="onAddTodo"
-                @completeTodo="onCompleteTodo"
-                @deleteTodo="onDeleteTodo">
+                @complete-todo="onCompleteTodo">
                 
             </component>
         </keep-alive>
@@ -21,9 +20,9 @@
 
 <script>
 
-    import TodoList from './components/TodoList';
-    import CompletedTodos from './components/CompletedTodos';
     import AddTodo from './components/AddTodo';
+    import CompletedTodos from './components/CompletedTodos';
+    import IncompletedTodos from './components/IncompletedTodos';
 
     import {todos} from './assets/js/todos';
 
@@ -31,14 +30,19 @@
         name: 'app',
         data() {
             return {
-                activeTab: 'TodoList',
+                activeTab: 'IncompletedTodos',
                 todos,
             }
         },
         components: {
-            TodoList,
-            CompletedTodos,
             AddTodo,
+            CompletedTodos,
+            IncompletedTodos,
+        },
+        computed: {
+            incompletedTodos(){
+                return this.todos.filter((x) => !x.completed);
+            }
         },
         methods: {
             changeTab(tabName) {
@@ -52,10 +56,6 @@
                 })
             },
             onCompleteTodo(todoId) {
-                let currentTodo = this.todos.find((x) => x.id === todoId);
-                currentTodo.completed = true;
-            },
-            onDeleteTodo(todoId) {
                 let currentTodo = this.todos.find((x) => x.id === todoId);
                 currentTodo.completed = true;
             }
