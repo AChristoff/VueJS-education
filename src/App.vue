@@ -11,8 +11,9 @@
                 :incompletedTodos="incompletedTodos"
                 :completedTodos="completedTodos"
                 @AddTodo="onAddTodo"
-                @complete-todo="onCompleteTodo">
-                
+                @complete-todo="onCompleteTodo"
+                @restore-todo="onRestoreTodo">
+            
             </component>
         </keep-alive>
     
@@ -41,13 +42,12 @@
             IncompletedTodos,
         },
         computed: {
-            incompletedTodos(){
+            incompletedTodos() {
                 return this.todos.filter((x) => !x.completed);
             },
             completedTodos() {
                 return this.todos.filter((x) => x.completed);
             }
-            
         },
         methods: {
             changeTab(tabName) {
@@ -61,8 +61,13 @@
                 })
             },
             onCompleteTodo(todoId) {
-                let currentTodo = this.todos.find((x) => x.id === todoId);
-                currentTodo.completed = true;
+                this.changeTodoState(todoId, true);
+            },
+            onRestoreTodo(todoId) {
+                this.changeTodoState(todoId, false);
+            },
+            changeTodoState(id, state) {
+                return this.todos.find((x) => x.id === id).completed = state;
             }
         }
     }
