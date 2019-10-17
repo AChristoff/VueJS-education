@@ -10,10 +10,7 @@
                 :is="activeTab"
                 :incompletedTodos="incompletedTodos"
                 :completedTodos="completedTodos"
-                @AddTodo="onAddTodo"
-                @complete-todo="onCompleteTodo"
-                @restore-todo="onRestoreTodo"
-                @delete-todo="onDeleteTodo">
+                @AddTodo="onAddTodo">
             
             </component>
         </keep-alive>
@@ -26,7 +23,7 @@
     import AddTodo from './components/AddTodo';
     import CompletedTodos from './components/CompletedTodos';
     import IncompletedTodos from './components/IncompletedTodos';
-
+    
     import {todos} from './assets/js/todos';
 
     export default {
@@ -72,7 +69,15 @@
             },
             changeTodoState(id, state) {
                 return this.todos.find((x) => x.id === id).completed = state;
+            },
+            addEventListeners() {
+                this.$root.$on('delete-todo', this.onDeleteTodo);
+                this.$root.$on('complete-todo', this.onCompleteTodo);
+                this.$root.$on('restore-todo', this.onRestoreTodo);
             }
+        },
+        mounted() {
+            this.addEventListeners();
         }
     }
 </script>
@@ -88,7 +93,7 @@
     
     .container {
         display: block;
-        width: 400px;
+        max-width: 460px;
         margin: 100px auto 0;
     }
     

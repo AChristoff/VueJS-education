@@ -22,10 +22,10 @@
         },
         methods: {
             restoreTodo(todoId) {
-                this.$emit('restore-todo', todoId);
+                this.$root.$emit('restore-todo', todoId);
             },
             deleteTodo(todoId) {
-              this.$emit('delete-todo', todoId);
+              this.$root.$emit('delete-todo', todoId);
             }
         }
     }
