@@ -56,6 +56,7 @@
                     id: this.todos.length,
                     name: todoName,
                     completed: false,
+                    edit: false,
                 })
             },
             onCompleteTodo(todoId) {
@@ -67,6 +68,19 @@
             onDeleteTodo(todId) {
                 this.todos = this.todos.filter((x) => x.id !== todId);
             },
+            onEditTodoStart(todoId) {
+                let targetTodo = this.todos.find((x) => x.id === todoId);
+                targetTodo.edit = !targetTodo.edit;
+            },
+            onEditTodoEnd(editedTodo) {
+                this.todos = this.todos.map((x) => {
+                    if (x.id === editedTodo.id) {
+                       editedTodo.edit = false;
+                       return editedTodo
+                    }
+                    return x;
+                })
+            },
             changeTodoState(id, state) {
                 return this.todos.find((x) => x.id === id).completed = state;
             },
@@ -74,6 +88,8 @@
                 this.$root.$on('delete-todo', this.onDeleteTodo);
                 this.$root.$on('complete-todo', this.onCompleteTodo);
                 this.$root.$on('restore-todo', this.onRestoreTodo);
+                this.$root.$on('edit-todo-start', this.onEditTodoStart);
+                this.$root.$on('edit-todo-end', this.onEditTodoEnd);
             }
         },
         mounted() {
