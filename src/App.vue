@@ -12,7 +12,8 @@
                 :completedTodos="completedTodos"
                 @AddTodo="onAddTodo"
                 @complete-todo="onCompleteTodo"
-                @restore-todo="onRestoreTodo">
+                @restore-todo="onRestoreTodo"
+                @delete-todo="onDeleteTodo">
             
             </component>
         </keep-alive>
@@ -55,7 +56,7 @@
             },
             onAddTodo(todoName) {
                 this.todos.push({
-                    id: todos.length,
+                    id: this.todos.length,
                     name: todoName,
                     completed: false,
                 })
@@ -65,6 +66,9 @@
             },
             onRestoreTodo(todoId) {
                 this.changeTodoState(todoId, false);
+            },
+            onDeleteTodo(todId) {
+                this.todos = this.todos.filter((x) => x.id !== todId);
             },
             changeTodoState(id, state) {
                 return this.todos.find((x) => x.id === id).completed = state;
