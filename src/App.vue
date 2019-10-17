@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        
+        <h1>{{activeTab | reverse }}</h1>
         <button @click="changeTab('IncompletedTodos')">Todo List</button>
         <button @click="changeTab('CompletedTodos')">Completed</button>
         <button @click="changeTab('AddTodo')">Add</button>
@@ -23,7 +23,8 @@
     import AddTodo from './components/AddTodo';
     import CompletedTodos from './components/CompletedTodos';
     import IncompletedTodos from './components/IncompletedTodos';
-    
+    import {formatingfMixins} from './mixins/formatMixins'
+
     import {todos} from './assets/js/todos';
 
     export default {
@@ -47,6 +48,9 @@
                 return this.todos.filter((x) => x.completed);
             }
         },
+        mixins: [
+            formatingfMixins
+        ],
         methods: {
             changeTab(tabName) {
                 this.activeTab = tabName;
@@ -75,8 +79,8 @@
             onEditTodoEnd(editedTodo) {
                 this.todos = this.todos.map((x) => {
                     if (x.id === editedTodo.id) {
-                       editedTodo.edit = false;
-                       return editedTodo
+                        editedTodo.edit = false;
+                        return editedTodo
                     }
                     return x;
                 })

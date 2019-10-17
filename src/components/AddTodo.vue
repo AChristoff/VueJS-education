@@ -1,12 +1,16 @@
 <template>
-    <p>
+    <div>
+        <h1>{{todoName | reverse | lowercase}}</h1>
+        
         <label for="new-task">Add Item</label>
         <input id="new-task" type="text" v-model="todoName"/>
         <button @click="addNewTodo">Add</button>
-    </p>
+    </div>
 </template>
 
 <script>
+    import {formattingfMixins, someOtherMixins } from '../mixins/formatMixins';
+
     export default {
         name: "AddTodo",
         methods: {
@@ -17,11 +21,23 @@
                 }
             }
         },
+        mixins: [
+            formattingfMixins,
+            someOtherMixins
+        ],
+        filters: {
+          lowercase(value) {
+              return value.toLowerCase();
+          }
+        },
         data() {
             return {
-               todoName: '',
+                todoName: '',
             }
         },
+        created() {
+            console.log('from Component');
+        }
     }
 </script>
 
