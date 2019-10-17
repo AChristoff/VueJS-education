@@ -23,7 +23,7 @@
     import AddTodo from './components/AddTodo';
     import CompletedTodos from './components/CompletedTodos';
     import IncompletedTodos from './components/IncompletedTodos';
-    import {formatingfMixins} from './mixins/formatMixins'
+    import {formattingfMixins, someOtherMixins} from './mixins/formatMixins'
 
     import {todos} from './assets/js/todos';
 
@@ -49,7 +49,8 @@
             }
         },
         mixins: [
-            formatingfMixins
+            formattingfMixins,
+            someOtherMixins
         ],
         methods: {
             changeTab(tabName) {

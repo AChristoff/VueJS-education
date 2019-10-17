@@ -1,6 +1,8 @@
 <template>
     <li>
         <input
+            v-focus
+            v-highlight="'yellow'"
             v-if="todo.edit"
             type="text"
             v-model="newName"
@@ -24,6 +26,18 @@
             todo: {
                 type: Object,
                 required: true,
+            }
+        },
+        directives: {
+            focus: {
+                inserted(el) {
+                    el.focus();
+                }
+            },
+            highlight: {
+                update(el, binding) {
+                    el.style.backgroundColor = binding.value;
+                }
             }
         },
         methods: {
