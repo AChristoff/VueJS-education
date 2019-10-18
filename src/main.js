@@ -9,6 +9,13 @@ Vue.config.productionTip = false;
 //HTTP requests library
 Vue.use(VueResource);
 Vue.http.options.root = 'https://jsonplaceholder.typicode.com/';
+Vue.http.interceptors.push((req, next) => {
+  if (req.method === 'POST') {
+    console.log(req);
+  }
+
+  next((res) => console.log(res))
+});
 //HTTP
 
 //declaring global filter
@@ -18,7 +25,7 @@ Vue.http.options.root = 'https://jsonplaceholder.typicode.com/';
 
 
 new Vue({
-  render: h => h(App),
+    render: h => h(App),
 }).$mount('#app');
 
 

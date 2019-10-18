@@ -5,7 +5,6 @@ export const formattingfMixins = {
         }
     },
     created() {
-        console.log('from Mixin');
     }
 };
 

@@ -30,6 +30,7 @@
             return {
                 activeTab: 'IncompletedTodos',
                 todos: [],
+                todoResource: {},
             }
         },
         components: {
@@ -110,6 +111,19 @@
                 }).catch(err => {
                 console.log(err);
             });
+            
+            const actions = {
+                getTodos: {
+                    method: 'get',
+                    utl: 'todos'
+                },
+                postTodos: {
+                    method: 'post',
+                    utl: 'todos'
+                }
+            };
+
+            this.todoResource = this.$resource('', {}, actions)
         }
     }
 </script>

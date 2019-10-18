@@ -37,7 +37,7 @@
             }
         },
         created() {
-            console.log('from Component');
+        
         }
     }
 </script>
