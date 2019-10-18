@@ -8,7 +8,7 @@
             v-model="newName"
             @keypress.enter="editTodoEnd()"
             @focusout="editTodoEnd()">
-        <label v-else @dblclick="editTodoStart()">{{todo.name}}</label>
+        <label v-else @dblclick="editTodoStart()">{{todo.title}}</label>
         <button class="complete" @click="completeTodo(todo.id)">Complete</button>
         <button class="delete" @click="deleteTodo(todo.id)">Delete</button>
     </li>

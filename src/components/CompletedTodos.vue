@@ -3,7 +3,7 @@
         <h3>Completed</h3>
         <ul id="completed-tasks">
             <li v-for="todo in completedTodos" :key="todo.id">
-                <label>{{todo.name}}</label>
+                <label>{{todo.title}}</label>
                 <button class="restore" @click="restoreTodo(todo.id)">Restore</button>
                 <button class="delete" @click="deleteTodo(todo.id)">Delete</button>
             </li>

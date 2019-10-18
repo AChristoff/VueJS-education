@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>{{activeTab | reverse }}</h1>
+        
         <button @click="changeTab('IncompletedTodos')">Todo List</button>
         <button @click="changeTab('CompletedTodos')">Completed</button>
         <button @click="changeTab('AddTodo')">Add</button>
@@ -11,7 +11,6 @@
                 :incompletedTodos="incompletedTodos"
                 :completedTodos="completedTodos"
                 @AddTodo="onAddTodo">
-            
             </component>
         </keep-alive>
     
@@ -25,14 +24,12 @@
     import IncompletedTodos from './components/IncompletedTodos';
     import {formattingfMixins, someOtherMixins} from './mixins/formatMixins'
 
-    import {todos} from './assets/js/todos';
-
     export default {
         name: 'app',
         data() {
             return {
                 activeTab: 'IncompletedTodos',
-                todos,
+                todos: [],
             }
         },
         components: {
@@ -57,11 +54,17 @@
                 this.activeTab = tabName;
             },
             onAddTodo(todoName) {
-                this.todos.push({
-                    id: this.todos.length,
-                    name: todoName,
-                    completed: false,
-                    edit: false,
+                
+                this.$http.post('todos', {
+                    userID: 1,
+                    title: todoName,
+                }).then(res => {
+                    this.todos.push({
+                        id: res.body.id,
+                        title: res.body.title ,
+                        completed: false,
+                        edit: false,
+                    })
                 })
             },
             onCompleteTodo(todoId) {
@@ -99,6 +102,14 @@
         },
         mounted() {
             this.addEventListeners();
+        },
+        created() {
+            this.$http.get('todos')
+                .then(res => {
+                    this.todos = res.body;
+                }).catch(err => {
+                console.log(err);
+            });
         }
     }
 </script>

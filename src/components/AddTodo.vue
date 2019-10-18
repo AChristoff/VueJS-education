@@ -16,6 +16,7 @@
         methods: {
             addNewTodo() {
                 if (this.todoName.trim().length > 0) {
+                    
                     this.$emit('AddTodo', this.todoName);
                     this.todoName = '';
                 }
