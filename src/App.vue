@@ -1,19 +1,11 @@
 <template>
-    
     <div class="container">
         <Form v-if="!isSend" @form-send="onFormSend"></Form>
         <ConfirmMessage
             v-else
-            :email="this.info.email"
-            :password="this.info.password"
-            :age="this.info.age"
-            :description="this.info.description"
-            :skills="this.info.skills"
-            :gender="this.info.gender"
-            :selectedCountry="this.info.selectedCountry"
+            :formInfo="formInfo"
         ></ConfirmMessage>
     </div>
-
 </template>
 
 <script>
@@ -29,12 +21,12 @@
         data() {
             return {
                 isSend: false,
-                info: {},
+                formInfo: {},
             }
         },
         methods: {
-            onFormSend(info) {
-                this.info = info;
+            onFormSend(formInfo) {
+                this.formInfo = formInfo;
                 this.isSend = true;
             }
         }

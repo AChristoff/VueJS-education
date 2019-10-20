@@ -13,7 +13,8 @@
     "popper": "^1.0.1",
     "popper.js": "^1.16.0",
     "register-service-worker": "^1.6.2",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",

@@ -5,16 +5,16 @@
             <h4>Your Data</h4>
         </div>
         <div class="card-body">
-            <p>Mail: {{email}}</p>
-            <p>Password: {{password}}</p>
-            <p>Age: {{age}}</p>
-            <p>Description: {{description}}</p>
+            <p>Mail: {{formInfo.email}}</p>
+            <p>Password: {{formInfo.password}}</p>
+            <p>Age: {{formInfo.age}}</p>
+            <p>Description: {{formInfo.description}}</p>
             <p><strong>Skill Set?</strong></p>
             <ul>
-                <li v-for="(skill, index) in skills" :key="index">{{skill}}</li>
+                <li v-for="(skill, index) in formInfo.skills" :key="index">{{skill}}</li>
             </ul>
-            <p>Gender: {{gender}}</p>
-            <p>Country: {{selectedCountry}}</p>
+            <p>Gender: {{formInfo.gender}}</p>
+            <p>Country: {{formInfo.selectedCountry}}</p>
         </div>
     </div>
 </template>
@@ -23,27 +23,9 @@
     export default {
         name: "ConfirmMessage",
         props: {
-            email: {
-                type: String
-            },
-            password: {
-                type: String
-            },
-            age: {
-                type: Number
-            },
-            description: {
-                type: String
-            },
-            skills: {
-                type: Array
-            },
-            gender: {
-                type: String
-            },
-            selectedCountry: {
-                type: String
-            },
+            formInfo: {
+                type: Object
+            }
         }
     }
 </script>
