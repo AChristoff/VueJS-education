@@ -15,7 +15,7 @@
                     <label for="password">Password</label>
                     <input v-model="formInfo.password" type="password" id="password" class="form-control">
                     <p v-if="!$v.formInfo.password.required" class="alert alert-danger">Password is required</p>
-                    <p v-else-if="$v.formInfo.password.alphaNum" class="alert alert-danger">Password must have at least one special character</p>
+                    <p v-else-if="!$v.formInfo.password.hasSpecialChar" class="alert alert-danger">Password must have at least one special character</p>
                     <p v-else-if="!$v.formInfo.password.minLength" class="alert alert-danger">Password must have at least {{ $v.formInfo.password.$params.minLength.min }} characters.</p>
                     <!---->
                 </div>
@@ -94,7 +94,7 @@
 
 <script>
 
-    import {required, email, alphaNum, numeric, minLength, sameAs, between} from 'vuelidate/lib/validators'
+    import {required, email, numeric, minLength, sameAs, between} from 'vuelidate/lib/validators'
 
 
     export default {
@@ -104,8 +104,8 @@
                 formInfo: {
                     email: 'example@email.com',
                     description: '...',
-                    password: '@123456',
-                    repeatPass: '@123456',
+                    password: '(123456',
+                    repeatPass: '(123456',
                     age: '18',
                     disabled: false,
                     skills: [],
@@ -129,7 +129,7 @@
                 password: {
                     required,
                     minLength: minLength(6),
-                    alphaNum,
+                    hasSpecialChar: (value) => /(?=.*[!@#$%^&*()_\-+={}[\].,;:"'`|\\/?])/.test(value),
                 },
                 repeatPass: {
                     required,
