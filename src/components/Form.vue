@@ -6,19 +6,34 @@
                 <hr>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input v-model.lazy.trim="formInfo.email" type="text" id="email"
-                           :class="['form-control', {'alert-danger': $v.formInfo.$invalid}]">
-                    <p v-if="$v.formInfo.$invalid" class="alert alert-danger">Email is not valid</p>
+                    <input class="form-control" v-model.trim.lazy="formInfo.email" type="text" id="email">
+                    <p v-if="!$v.formInfo.email.required" class="alert alert-danger">Email is required </p>
+                    <p v-if="!$v.formInfo.email.email" class="alert alert-danger">Email is not valid</p>
                     <!---->
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input v-model.lazy="formInfo.password" type="password" id="password" class="form-control">
+                    <input v-model="formInfo.password" type="password" id="password" class="form-control">
+                    <p v-if="!$v.formInfo.password.required" class="alert alert-danger">Password is required</p>
+                    <p v-else-if="$v.formInfo.password.alphaNum" class="alert alert-danger">Password must have at least one special character</p>
+                    <p v-else-if="!$v.formInfo.password.minLength" class="alert alert-danger">Password must have at least {{ $v.formInfo.password.$params.minLength.min }} characters.</p>
+                    <!---->
+                </div>
+                <div class="form-group">
+                    <label for="repeatPass">Repeat Password</label>
+                    <input v-model="formInfo.repeatPass" type="password" id="repeatPass" class="form-control">
+                    <p v-if="!$v.formInfo.repeatPass.required" class="alert alert-danger">Field is required</p>
+                    <p v-else-if="$v.formInfo.repeatPass.sameAs" class="alert alert-success">OK</p>
+                    <p v-else class="alert alert-danger">Passwords do not match!</p>
                     <!---->
                 </div>
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input v-model.number="formInfo.age" type="number" id="age" class="form-control"></div>
+                    <input v-model.number="formInfo.age" type="number" id="age" class="form-control">
+                    <p v-if="!$v.formInfo.age.required" class="alert alert-danger">Age is required</p>
+                    <p v-else-if="!$v.formInfo.age.numeric" class="alert alert-danger">Age must be numeric value</p>
+                    <p v-else-if="!$v.formInfo.age.between" class="alert alert-danger">Age must be between {{ $v.formInfo.age.$params.between.min }} and {{ $v.formInfo.age.$params.between.max }} years</p>
+                </div>
                 <!---->
             </div>
         </div>
@@ -58,19 +73,20 @@
                 <label for="country">Country</label>
                 <select v-model="formInfo.selectedCountry"
                         id="country"
-                        class="form-control">
+                        class="form-control mb-2">
                     <option
                         v-for="country in countries"
                         :key="country.code"
                         :value="country.text">{{country.text}}
                     </option>
                 </select>
+                <hr>
             </div>
         </div>
-        <hr>
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <button class="btn btn-primary">Submit!</button>
+                <button class="btn btn-primary btn-lg btn-block mt-5"
+                        :disabled="$v.formInfo.$invalid">Submit!</button>
             </div>
         </div>
     </form>
@@ -78,7 +94,7 @@
 
 <script>
 
-    import {required, email} from 'vuelidate/lib/validators'
+    import {required, email, alphaNum, numeric, minLength, sameAs, between} from 'vuelidate/lib/validators'
 
 
     export default {
@@ -87,9 +103,10 @@
             return {
                 formInfo: {
                     email: 'example@email.com',
-                    description: 'description',
-                    password: 'password',
-                    age: 18,
+                    description: '...',
+                    password: '@123456',
+                    repeatPass: '@123456',
+                    age: '18',
                     disabled: false,
                     skills: [],
                     gender: '',
@@ -106,8 +123,23 @@
         validations: {
             formInfo: {
                 email: {
-                    required, email
-                }
+                    required,
+                    email
+                },
+                password: {
+                    required,
+                    minLength: minLength(6),
+                    alphaNum,
+                },
+                repeatPass: {
+                    required,
+                    sameAs: sameAs('password')
+                },
+                age: {
+                    required,
+                    numeric,
+                    between: between(18, 100)
+                },
             },
         },
         methods: {

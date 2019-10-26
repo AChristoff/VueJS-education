@@ -42,4 +42,9 @@
         color: #2c3e50;
         margin-top: 60px;
     }
+
+    .container {
+        margin: 30px auto 60px auto;
+    }
+    
 </style>
