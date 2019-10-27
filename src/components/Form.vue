@@ -161,14 +161,6 @@
         methods: {
             onSubmit() {
                 this.$emit('form-send', this.formInfo);
-            },
-            methods: {
-                status(validation) {
-                    return {
-                        error: validation.$error,
-                        dirty: validation.$dirty
-                    }
-                }
             }
         }
     }
