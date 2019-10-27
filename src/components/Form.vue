@@ -5,32 +5,48 @@
                 <h1>Registration</h1>
                 <hr>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" v-model.trim.lazy="formInfo.email" type="text" id="email">
-                    <p v-if="!$v.formInfo.email.required" class="alert alert-danger">Email is required </p>
-                    <p v-if="!$v.formInfo.email.email" class="alert alert-danger">Email is not valid</p>
+                    <label for="email">Email *</label>
+                    <input @blur="$v.formInfo.email.$touch"
+                           v-model.trim.lazy="formInfo.email"
+                           id="email"
+                           class="form-control"
+                           type="text">
+                    <p v-if="!$v.formInfo.email.required && $v.formInfo.email.$dirty" class="alert alert-danger">Email is required </p>
+                    <p v-else-if="!$v.formInfo.email.email" class="alert alert-danger">Email is not valid</p>
                     <!---->
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input v-model="formInfo.password" type="password" id="password" class="form-control">
-                    <p v-if="!$v.formInfo.password.required" class="alert alert-danger">Password is required</p>
-                    <p v-else-if="!$v.formInfo.password.hasSpecialChar" class="alert alert-danger">Password must have at least one special character</p>
+                    <label for="password">Password *</label>
+                    <input @blur="$v.formInfo.password.$touch"
+                           v-model="formInfo.password"
+                           id="password"
+                           class="form-control"
+                           type="password">
+                    <p v-if="!$v.formInfo.password.required && $v.formInfo.password.$dirty" class="alert alert-danger">Password is required</p>
+                    <p v-else-if="!$v.formInfo.password.hasSpecialChar && $v.formInfo.password.$dirty" class="alert alert-danger">Password must have at least one special character</p>
                     <p v-else-if="!$v.formInfo.password.minLength" class="alert alert-danger">Password must have at least {{ $v.formInfo.password.$params.minLength.min }} characters.</p>
                     <!---->
                 </div>
                 <div class="form-group">
-                    <label for="repeatPass">Repeat Password</label>
-                    <input v-model="formInfo.repeatPass" type="password" id="repeatPass" class="form-control">
-                    <p v-if="!$v.formInfo.repeatPass.required" class="alert alert-danger">Field is required</p>
-                    <p v-else-if="$v.formInfo.repeatPass.sameAs" class="alert alert-success">OK</p>
-                    <p v-else class="alert alert-danger">Passwords do not match!</p>
+                    <label for="repeatPass">Repeat Password *</label>
+                    <input @blur="$v.formInfo.repeatPass.$touch"
+                           v-model="formInfo.repeatPass"
+                           id="repeatPass"
+                           class="form-control"
+                           type="password">
+                    <p v-if="!$v.formInfo.repeatPass.required && $v.formInfo.repeatPass.$dirty" class="alert alert-danger">Field is required</p>
+                    <p v-else-if="!$v.formInfo.repeatPass.sameAs && $v.formInfo.repeatPass.$dirty" class="alert alert-danger">Passwords do not match!</p>
+                    <p v-else-if="$v.formInfo.repeatPass.sameAs && $v.formInfo.repeatPass.$dirty" class="alert alert-success">OK</p>
                     <!---->
                 </div>
                 <div class="form-group">
-                    <label for="age">Age</label>
-                    <input v-model.number="formInfo.age" type="number" id="age" class="form-control">
-                    <p v-if="!$v.formInfo.age.required" class="alert alert-danger">Age is required</p>
+                    <label for="age">Age *</label>
+                    <input @blur="$v.formInfo.age.$touch"
+                           v-model.number="formInfo.age"
+                           id="age"
+                           class="form-control"
+                           type="number">
+                    <p v-if="!$v.formInfo.age.required && $v.formInfo.age.$dirty" class="alert alert-danger">Age is required</p>
                     <p v-else-if="!$v.formInfo.age.numeric" class="alert alert-danger">Age must be numeric value</p>
                     <p v-else-if="!$v.formInfo.age.between" class="alert alert-danger">Age must be between {{ $v.formInfo.age.$params.between.min }} and {{ $v.formInfo.age.$params.between.max }} years</p>
                 </div>
@@ -86,7 +102,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <button class="btn btn-primary btn-lg btn-block mt-5"
-                        :disabled="$v.formInfo.$invalid">Submit!</button>
+                        :disabled="$v.formInfo.$invalid">Submit!
+                </button>
             </div>
         </div>
     </form>
@@ -102,12 +119,11 @@
         data() {
             return {
                 formInfo: {
-                    email: 'example@email.com',
+                    email: '',
+                    password: '',
+                    repeatPass: '',
+                    age: '',
                     description: '...',
-                    password: '(123456',
-                    repeatPass: '(123456',
-                    age: '18',
-                    disabled: false,
                     skills: [],
                     gender: '',
                     selectedCountry: '',
@@ -145,6 +161,14 @@
         methods: {
             onSubmit() {
                 this.$emit('form-send', this.formInfo);
+            },
+            methods: {
+                status(validation) {
+                    return {
+                        error: validation.$error,
+                        dirty: validation.$dirty
+                    }
+                }
             }
         }
     }
