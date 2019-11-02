@@ -101,9 +101,10 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <button class="btn btn-primary btn-lg btn-block mt-5"
-                        :disabled="$v.formInfo.$invalid">Submit!
-                </button>
+                <router-link to="/message" class="btn btn-primary btn-lg btn-block mt-5"
+                   :disabled="$v.formInfo.$invalid">
+                    Submit!
+                </router-link>
             </div>
         </div>
     </form>
@@ -119,10 +120,10 @@
         data() {
             return {
                 formInfo: {
-                    email: '',
-                    password: '',
-                    repeatPass: '',
-                    age: '',
+                    email: 'test@mail.com',
+                    password: '@123456',
+                    repeatPass: '@123456',
+                    age: '21',
                     description: '...',
                     skills: [],
                     gender: '',

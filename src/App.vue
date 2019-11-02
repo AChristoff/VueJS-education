@@ -1,11 +1,13 @@
 <template>
     <div class="container">
-        <Home></Home>
-        <Form v-if="!isSend" @form-send="onFormSend"></Form>
-        <ConfirmMessage
-            v-else
-            :formInfo="formInfo"
-        ></ConfirmMessage>
+        <router-view>
+            <Home></Home>
+            <Form v-if="!isSend" @form-send="onFormSend"></Form>
+            <ConfirmMessage
+                v-else
+                :formInfo="formInfo"
+            ></ConfirmMessage>
+        </router-view>
     </div>
 </template>
 
@@ -45,9 +47,9 @@
         color: #2c3e50;
         margin-top: 60px;
     }
-
+    
     .container {
         margin: 30px auto 60px auto;
     }
-    
+
 </style>
