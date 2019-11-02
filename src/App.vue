@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Home></Home>
         <Form v-if="!isSend" @form-send="onFormSend"></Form>
         <ConfirmMessage
             v-else
@@ -9,12 +10,14 @@
 </template>
 
 <script>
+    import Home from './components/Home.vue';
     import ConfirmMessage from './components/ConfirmMessage.vue';
-    import Form from './components/Form.vue'
+    import Form from './components/Form.vue';
 
     export default {
         name: 'app',
         components: {
+            Home,
             ConfirmMessage,
             Form,
         },
