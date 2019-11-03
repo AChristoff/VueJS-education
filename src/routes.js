@@ -3,7 +3,7 @@ import Form from './components/Form.vue';
 import ConfirmMessage from "./components/ConfirmMessage.vue";
 
 export const routes = [
-    {path: '', component: Home},
+    {path: '/', component: Home},
     {path: '/contacts', component: Form},
     {path: '/message', component: ConfirmMessage},
 ];

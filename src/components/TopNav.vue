@@ -1,18 +1,8 @@
 <template>
     <ul>
-        <li>
-            <router-link to="/" class="btn btn-primary btn-lg btn-block">
-                Home
-            </router-link>
-        </li>
-        <li>
-            <router-link to="/contacts" class="btn btn-primary btn-lg btn-block">
-                Contacts
-            </router-link>
-        </li>
-        <li>
-            <router-link to="/message" class="btn btn-primary btn-lg btn-block">
-                Message
+        <li v-for="(route, idx) in routes" :key="idx">
+            <router-link :to="route.link" class="btn btn-primary btn-lg btn-block">
+                {{route.name}}
             </router-link>
         </li>
     </ul>
@@ -20,7 +10,16 @@
 
 <script>
     export default {
-        name: "TopNav"
+        name: "TopNav",
+        data() {
+            return {
+                routes: [
+                    {link: '/', name: 'Home'},
+                    {link: '/contacts', name: 'Contacts'},
+                    {link: '/message', name: 'Message'},
+                ]
+            }
+        }
     }
 </script>
 
