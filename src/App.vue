@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <TopNav></TopNav>
         <router-view>
             <Home></Home>
             <Form v-if="!isSend" @form-send="onFormSend"></Form>
@@ -13,6 +14,7 @@
 
 <script>
     import Home from './components/Home.vue';
+    import TopNav from './components/TopNav.vue';
     import ConfirmMessage from './components/ConfirmMessage.vue';
     import Form from './components/Form.vue';
 
@@ -20,6 +22,7 @@
         name: 'app',
         components: {
             Home,
+            TopNav,
             ConfirmMessage,
             Form,
         },
