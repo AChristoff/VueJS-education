@@ -45,6 +45,10 @@
         flex-wrap: wrap;
     }
     
+    .movie {
+        padding: 15px 20px;
+    }
+    
     .home li.movie {
         display: grid;
     }
