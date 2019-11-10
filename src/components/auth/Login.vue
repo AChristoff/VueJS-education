@@ -1,11 +1,11 @@
 <template>
     <div class="login">
         <h1>Login</h1>
-        <form>
+        <form @submit.prevent="onLoginSubmit">
             <label for="login">Username</label>
-            <input type="text" id="login" placeholder="Ivan Ivanov"/>
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="******"/>
+            <input v-model="username" type="text" id="login" placeholder="Ivan Ivanov"/>
+            <label for="password" >Password</label>
+            <input v-model="password" type="password" id="password" placeholder="******"/>
             
             <input type="submit" value="Login"/>
         </form>
@@ -13,8 +13,23 @@
 </template>
 
 <script>
+
+    import {userAuthentication} from '@/services/authServices';
+    
     export default {
-        name: "Login"
+        name: "Login",
+        data() {
+            return {
+                username: '',
+                password: '',
+            }
+        },
+        mixins: [userAuthentication],
+        methods: {
+            onLoginSubmit() {
+                this.loginUser(this.username, this.password);
+            }
+        }
     }
 </script>
 

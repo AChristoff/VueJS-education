@@ -19,7 +19,7 @@
 
 <script>
 
-    import {register} from '@/services/authServices'
+    import {userAuthentication} from '@/services/authServices';
     import {
         required,
         minLength,
@@ -36,7 +36,7 @@
                 email: '',
             }
         },
-        mixins: [register],
+        mixins: [userAuthentication],
         validations: {
             username: {
                 required,

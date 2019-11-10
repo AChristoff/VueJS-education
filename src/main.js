@@ -3,13 +3,13 @@ import App from './App.vue';
 import router from './router';
 import Vuelidate from 'vuelidate';
 import axiosPlugin from './plugins/axiosPlugin';
-import {authentication} from "./services/authServices";
+import {authenticate} from "./services/authServices";
 
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.use(axiosPlugin);
 
-Vue.mixin(authentication);
+Vue.mixin(authenticate);
 
 new Vue({
   router,
