@@ -2,13 +2,15 @@
     <header class="app-header">
         <a href="/" class="logo">SoftUni IMDB</a>
         <div class="header-right">
-        <span>
-            <a href="/movie/create">Create</a>
-            <a href="#">Welcome testuser!</a>
-            <a href="#">Logout</a>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-        </span>
+            <template v-if="isAuth">
+                <a href="/movie/create">Create</a>
+                <a href="#">Welcome testuser!</a>
+                <a href="#">Logout</a>
+            </template>
+            <template v-else>
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+            </template>
         </div>
     </header>
 </template>

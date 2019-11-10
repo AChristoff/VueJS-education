@@ -1,7 +1,7 @@
 <template>
     <div class="register">
         <h1>Register</h1>
-        <form @submit.prevent="onRegister">
+        <form id="register-form" @submit.prevent="onRegisterSubmit">
             <label for="username">Username</label>
             <input type="text" v-model="$v.username.$model" id="username" placeholder="Ivan Ivanov"/>
             <label for="email">Email</label>
@@ -9,14 +9,17 @@
             <label for="password">Password</label>
             <input type="password" v-model="$v.password.$model" id="password" placeholder="******"/>
             
-            <input type="submit" value="Register" :disabled="$v.$invalid"/>
+            <button type="submit"
+                    form="register-form"
+                    :disabled="$v.$invalid">Register
+            </button>
         </form>
     </div>
 </template>
 
 <script>
-    
-    import { register } from '@/services/authServices'
+
+    import {register} from '@/services/authServices'
     import {
         required,
         minLength,
@@ -29,7 +32,7 @@
         data() {
             return {
                 username: 'Pesho',
-                password: 'pass',
+                password: '',
                 email: '',
             }
         },
@@ -42,7 +45,7 @@
             },
             password: {
                 required,
-                minLength: minLength(4),
+                minLength: minLength(3),
                 maxLength: maxLength(20),
             },
             email: {
@@ -50,7 +53,7 @@
             },
         },
         methods: {
-            onRegister() {
+            onRegisterSubmit() {
                 this.registerUser(this.username, this.password);
             }
         }
@@ -75,8 +78,9 @@
         margin-bottom: 20px;
     }
     
-    .register input[type="submit"] {
+    .register button {
         margin: 20px auto 0;
+        padding: 8px 16px;
         border: 2px solid dodgerblue;
         text-align: center;
         font-size: 14px;
@@ -86,12 +90,12 @@
         box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
     }
     
-    .register input[type="submit"]:hover {
+    .register button:hover {
         color: dodgerblue;
         background: transparent;
     }
     
-    .register input[type="submit"]:disabled {
+    .register button:disabled {
         opacity: 0.5;
         pointer-events: none;
     }

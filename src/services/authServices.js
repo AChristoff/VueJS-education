@@ -19,10 +19,21 @@ export const register = {
                     username,
                     password,
                 }
-            }).then(res => {
+            }).then((res) => {
+                localStorage.setItem('username', res.data.username);
+                localStorage.setItem('authtoken', res.data._kmd.authtoken);
+
                 this.$router.push('/');
-                console.log(res);
             });
+        }
+    }
+};
+
+
+export const authentication = {
+    computed: {
+        isAuth() {
+          return localStorage.getItem('authtoken') !== null;
         }
     }
 };
