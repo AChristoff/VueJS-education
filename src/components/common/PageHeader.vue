@@ -2,7 +2,7 @@
     <header class="app-header">
         <a href="/" class="logo">SoftUni IMDB</a>
         <div class="header-right">
-            <template v-if="isAuth()">
+            <template v-if="isAuth">
                 <a href="/movie/create">Create</a>
                 <a href="#">Welcome testuser!</a>
                 <a href="#">Logout</a>
@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: "PageHeader"
+        name: "PageHeader",
     }
 </script>
 

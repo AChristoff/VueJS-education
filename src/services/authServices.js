@@ -42,7 +42,6 @@ export const userAuthentication = {
             }).then((res) => {
                 localStorage.setItem('username', res.data.username);
                 localStorage.setItem('authtoken', res.data._kmd.authtoken);
-
                 this.$router.push('/');
             });
         }
@@ -51,9 +50,14 @@ export const userAuthentication = {
 
 
 export const authenticate = {
-    methods: {
-        isAuth() {
-            return localStorage.getItem('authtoken') !== null;
+    data() {
+        return {
+            isAuth: localStorage.getItem('authtoken'),
         }
-    }
+    },
+    watch:{
+        $route (to, from){
+            this.isAuth = localStorage.getItem('authtoken') !== null;
+        }
+    },
 };
