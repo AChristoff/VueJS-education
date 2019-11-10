@@ -3,11 +3,11 @@
         <a href="/" class="logo">SoftUni IMDB</a>
         <div class="header-right">
         <span>
-          <a href="/movie/create">Create</a>
-          <a href="#">Welcome testuser!</a>
-          <a href="#">Logout</a>
-            <!-- <a href="/register">Register</a>
-                <a href="/login">Login</a> -->
+            <a href="/movie/create">Create</a>
+            <a href="#">Welcome testuser!</a>
+            <a href="#">Logout</a>
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
         </span>
         </div>
     </header>
