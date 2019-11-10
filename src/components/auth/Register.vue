@@ -15,16 +15,13 @@
 </template>
 
 <script>
-
-    import axios from 'axios';
-    import config from '@/config/config'
-
+    
+    import { register } from '@/services/authServices'
     import {
         required,
         minLength,
         maxLength,
         email,
-
     } from 'vuelidate/lib/validators';
 
     export default {
@@ -36,6 +33,7 @@
                 email: '',
             }
         },
+        mixins: [register],
         validations: {
             username: {
                 required,
@@ -53,21 +51,7 @@
         },
         methods: {
             onRegister() {
-                const authSting = btoa(`${config.appKey}:${config.appSecret}`);
-                axios({
-                    url: `https://baas.kinvey.com/user/${config.appKey}`,
-                    method: 'POST',
-                    data: {
-                        'username': this.username,
-                        'password': this.password,
-                    },
-                    headers: {
-                        'Authorization': `Basic ${authSting}`,
-                        'Content-Type': 'application/json',
-                    },
-                }).then(res => {
-                    console.log(res);
-                });
+                this.registerUser(this.username, this.password);
             }
         }
     }
