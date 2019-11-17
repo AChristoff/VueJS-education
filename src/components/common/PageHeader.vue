@@ -4,8 +4,8 @@
         <div class="header-right">
             <template v-if="isAuth">
                 <a href="/movie/create">Create</a>
-                <a href="#">Welcome testuser!</a>
-                <a href="#">Logout</a>
+                <a href="#">Welcome {{username}}</a>
+                <a href="/" @click="onLogout()">Logout</a>
             </template>
             <template v-else>
                 <a href="/register">Register</a>
@@ -18,6 +18,11 @@
 <script>
     export default {
         name: "PageHeader",
+        methods: {
+            onLogout() {
+                localStorage.clear();
+            }
+        }
     }
 </script>
 

@@ -54,6 +54,7 @@
         },
         methods: {
             onRegisterSubmit() {
+                document.querySelector('#loading-spinner').style.display = 'inline-block';
                 this.registerUser(this.username, this.password);
             }
         }
@@ -63,6 +64,10 @@
 <style scoped>
     
     /* Register CSS */
+    h1 {
+        margin-top:40px;
+    }
+    
     .register {
         padding-top: 2em;
     }

@@ -27,6 +27,7 @@
         mixins: [userAuthentication],
         methods: {
             onLoginSubmit() {
+                document.querySelector('#loading-spinner').style.display = 'inline-block';
                 this.loginUser(this.username, this.password);
             }
         }
@@ -35,6 +36,11 @@
 
 <style scoped>
     /* Login CSS */
+    
+    h1 {
+        margin-top: 70px;
+    }
+    
     .login form {
         display: grid;
         width: 25%;

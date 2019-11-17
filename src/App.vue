@@ -7,6 +7,7 @@
         </div>
         
         <page-footer></page-footer>
+        <div id="loading-spinner"></div>
     </div>
 </template>
 
@@ -41,6 +42,36 @@
             
             .app-body {
                 margin-bottom: 40px;
+            }
+        }
+    
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            top: 40vh;
+            left: 46.5vw;
+            width: 80px;
+            height: 80px;
+    
+            &:after {
+                content: " ";
+                display: block;
+                width: 54px;
+                height: 54px;
+                margin: 8px;
+                border-radius: 50%;
+                border: 6px solid #0064C6;
+                border-color: #0064C6 transparent #0064C6 transparent;
+                animation: loading-spinner-animation 1.2s linear infinite;
+            }
+    
+            @keyframes loading-spinner-animation {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
             }
         }
         
