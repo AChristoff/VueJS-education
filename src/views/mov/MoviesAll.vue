@@ -14,6 +14,8 @@
 
 <script>
 
+    import config from '@/config/config'
+
     export default {
         name: "AllMovies",
         computed: {
@@ -31,7 +33,7 @@
                     .toggle('visible');
             },
         },
-        created() {
+        mounted() {
             this.$store.dispatch('getAll');
         }
     }
