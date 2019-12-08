@@ -1,8 +1,5 @@
 <template>
     <div class="home">
-        <!-- <h1>Welcome to the Page!</h1>
-            <p>Please  <a href="/login">login</a> at the System</p>
-            <p>or  <a href="/register">register</a> if you haven't</p> -->
         <h1>All movies</h1>
         <ul class="movies-list">
             <li :id="movie._id" class="movie" v-for="movie in movies" :key="movie._id">
@@ -17,12 +14,14 @@
 
 <script>
 
-    import {movieService} from "../../services/movieServices";
-
     export default {
         name: "AllMovies",
+        computed: {
+            movies() {
+                return this.$store.state.movies;
+            }
+        },
         methods: {
-
             toggleInfo(event) {
                 event
                     .target
@@ -30,9 +29,11 @@
                     .querySelector('.movie-info')
                     .classList
                     .toggle('visible');
-            }
+            },
         },
-        mixins: [movieService],
+        created() {
+            this.$store.dispatch('getAll');
+        }
     }
 </script>
 

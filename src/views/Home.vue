@@ -7,8 +7,6 @@
 
 <script>
 
-    import {movieService} from "../services/movieServices";
-
     export default {
         name: "Home",
     }
