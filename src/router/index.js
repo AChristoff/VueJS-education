@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/components/home/Home';
-import Register from '@/components/auth/Register';
-import Login from '@/components/auth/Login';
-import allMovies from '@/components/mov/MoviesAll';
+import Home from '@/views/Home';
+import Register from '@/views/auth/Register';
+import Login from '@/views/auth/Login';
+import allMovies from '@/views/mov/MoviesAll';
 
 
 Vue.use(VueRouter);
@@ -25,7 +25,7 @@ const routes = [
         component: Login,
     },
     {
-        path: '/all-movies',
+        path: '/movie/all',
         name: 'allMovies',
         component: allMovies,
     },

@@ -3,6 +3,7 @@
         <a href="/" class="logo">SoftUni IMDB</a>
         <div class="header-right">
             <template v-if="isAuth">
+                <a href="/movie/all">All</a>
                 <a href="/movie/create">Create</a>
                 <a href="#">Welcome {{username}}</a>
                 <a href="/" @click="onLogout()">Logout</a>

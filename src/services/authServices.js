@@ -20,7 +20,7 @@ export const userAuthentication = {
                 localStorage.setItem('username', res.data.username);
                 localStorage.setItem('authtoken', res.data._kmd.authtoken);
                 document.querySelector('#loading-spinner').style.display = 'none';
-                this.$router.push('/all-movies');
+                this.$router.push('/');
             });
         },
         loginUser(username, password) {
@@ -40,7 +40,7 @@ export const userAuthentication = {
                 localStorage.setItem('username', res.data.username);
                 localStorage.setItem('authtoken', res.data._kmd.authtoken);
                 document.querySelector('#loading-spinner').style.display = 'none';
-                this.$router.push('/all-movies');
+                this.$router.push('/');
             });
         }
     }
