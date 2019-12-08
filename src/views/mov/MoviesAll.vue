@@ -14,8 +14,6 @@
 
 <script>
 
-    import config from '@/config/config'
-
     export default {
         name: "AllMovies",
         computed: {
