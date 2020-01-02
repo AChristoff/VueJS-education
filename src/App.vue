@@ -25,6 +25,9 @@
 </script>
 
 <style lang="scss">
+    
+    @import '@/sass/_buttons.scss';
+    
     body {
         margin: 0;
         padding: 0;

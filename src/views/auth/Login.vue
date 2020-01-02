@@ -7,7 +7,7 @@
             <label for="password" >Password</label>
             <input v-model="password" type="password" id="password" placeholder="******"/>
             
-            <input type="submit" value="Login"/>
+            <input class="login-btn" type="submit" value="Login"/>
         </form>
     </div>
 </template>
@@ -50,17 +50,6 @@
     .login input {
         padding: 10px;
         margin-bottom: 20px;
-    }
-    
-    .login input[type="submit"] {
-        margin: 20px auto 0;
-        border: 2px solid dodgerblue;
-        text-align: center;
-        font-size: 14px;
-        background: dodgerblue;
-        color: white;
-        border-radius: 7px;
-        box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
     }
     
     .login input[type="submit"]:hover {
